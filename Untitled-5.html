@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>温度变化</title>
+</head>
+<script src="echarts.js"></script>
+
+<body>
+    <div id="main" style="width: 800px;height:500px;"></div>
+    <script>
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var option = {
+            title: {
+                top: '3%',
+                left: 'center',
+                text: '1分钟的温度变化情况'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {       //此处写了为十字准星指示器。则下面就不用写了。
+                    type: 'cross',  //'cross'表示，十字准星指示器。其实是种简写，表示启用两个正交的轴的 axisPointer。
+                    crossStyle: {
+                        color: '#999'
+                    }
+                }
+            },
+            toolbox: {                                          //表示右上角的一个页面转换工具箱
+                feature: {
+                    dataView: { show: true, readOnly: false }, //表示数据文档视图
+                    restore: { show: true },                      //以下两行表示刷新/还原为一开始的例图
+                    saveAsImage: { show: true }
+                }
+            },
+            legend: {
+                data: ['温度'],
+                bottom: 10,
+                left: 'center'
+
+            },
+            xAxis: [
+                {
+                    name: '时间(S)',  //x轴name默认写在末尾
+                    //nameLocation: 'end', //坐标轴名称显示位置。可选：'start'(开始),'middle' 或者 'center'(中间),'end'(结尾)
+                    type: 'category',
+                    data: ['03', '06', '09', '12', '15', '18', '21', '24', '27', '30', '33', '36',
+                        '39', '42', '45', '48', '51', '54', '57', '60'],
+                    // axisPointer: {
+                    //     type: 'line'   // 默认为直线，'line'直线指示器 | 'shadow'柱状阴影指示器
+                    // },
+                    axisTick: {    //表示坐标轴刻度相关设置。
+                        alignWithLabel: true,   //为 true 的时候有效，可以保证刻度线和标签对齐。即x轴的那个小黑线位于中间
+                        show: false    //是否显示坐标轴刻度。
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    min: 12,
+                    max: 27,
+                    type: 'value',
+                    name: '温度(°C)',
+                    axisLabel: {   //表示坐标轴刻度标签的相关设置。
+                        formatter: '{value} °C'
+                    },
+                    axisTick: {    //表示坐标轴刻度相关设置。
+                        show: false    //是否显示坐标轴刻度。
+                    },
+                    axisLine:{      //表示坐标轴轴线相关设置。
+                        show: false  //表示不显示y轴坐标轴
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '温度',
+                    type: 'line',
+                    data: [19, 19, 18, 18, 17, 17, 16, 25, 19, 20,
+                        17, 13, 18, 16, 17, 16, 24, 19, 20, 17]
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。5、一定保留此句话
+        myChart.setOption(option);
+
+    </script>
+</body>
+</html>

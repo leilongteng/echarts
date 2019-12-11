@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>违章分析折线图</title>
+</head>
+<script src="echarts.js"></script>
+
+<body>
+    <div id="main" style="width: 800px; height: 500px;"></div>
+
+    <script>
+        var myChart = echarts.init(document.getElementById("main"));
+        var option = {
+            title: {
+                text:'违章分析',
+            },
+            tooltip:{
+                trigger: 'axis',
+            },
+            legend:{
+                date:['违章次数'],
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['学院路', '联想路', '医院路', '幸福路', '环城快速路', '环城高速'],
+                    axisTick: {    //表示坐标轴刻度相关设置。
+                        alignWithLabel: true ,   //为 true 的时候有效，可以保证刻度线和标签对齐。即x轴的那个小黑线位于中间
+                        //show: false    //是否显示坐标轴刻度。
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type:'value',
+                    name:'次数',
+                }
+            ],
+            series: [
+                {
+                    name: '违章次数',
+                    type: 'line',
+                    data: [67, 254, 153, 185, 91, 64],
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+
+    </script>
+</body>
+
+</html>

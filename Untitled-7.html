@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>路况分析</title>
+    <!-- 引入 echarts.js -->
+    <script src="echarts.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1000px;height:600px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                left: 'center',
+                text: '路况分析'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow',       // 默认为直线，'line'直线指示器 | 'shadow'阴影指示器 | 'cross'表示，十字准星指示器。  
+                }
+            },
+            legend: {
+                bottom: 5,
+                data: ['学院路', '联想路', '医院路', '幸福路', '环城快速路', '环城高速', '停车场']
+            },
+            xAxis: {
+                type: 'category',  //category用于表示中文
+                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+            },
+            yAxis: [
+                {
+                    type: 'value',  //value用于表示数字
+                    //scale: true,  //只在数值轴中（type: 'value'）有效。在设置 min 和 max 之后该配置项无效。
+                    min: 0,
+                    max: 5,
+                    name: '道路拥堵状况',
+                    //data: ["畅通", "缓行", "一般拥堵", "中度拥堵", "严重拥堵"],
+                    axisLabel: {
+                        formatter: function (value) {
+                            var texts = [];
+                            if (value == 0) {
+                                texts.push('');
+                            }
+                            else if (value <= 1) {
+                                texts.push('畅通');
+                            }
+                            else if (value <= 2) {
+                                texts.push('缓行');
+                            }
+                            else if (value <= 3) {
+                                texts.push('一般拥堵');
+                            }
+                            else if (value <= 4) {
+                                texts.push('中度拥堵');
+                            }
+                            else {
+                                texts.push('严重拥堵');
+                            }
+                            return texts;
+                        }
+                    }
+                },
+                {
+                    type: 'value',   //value用于表示数字
+                    //scale: true,   //只在数值轴中（type: 'value'）有效。在设置 min 和 max 之后该配置项无效。
+                    max: 5,
+                    min: 0,
+                    //boundaryGap: [0.2, 0.2]  //坐标轴两边留白策略，在设置 min 和 max 之后该配置项无效。
+
+                }
+            ],
+            series: [
+                {
+                    name: '学院路',
+                    type: 'bar',
+                    data: [4.5, 4.5, 3.5, 3.5, 2.5, 3.5, 2.5]
+                },
+                {
+                    name: '联想路',
+                    type: 'bar',
+                    data: [3.5, 2.5, 1.5, 4.5, 2.5, 1.5, 3.5]
+                },
+                {
+                    name: '医院路',
+                    type: 'bar',
+                    data: [2.5, 1.5, 3.5, 2.5, 3.5, 4.5, 2.5]
+                },
+                {
+                    name: '幸福路',
+                    type: 'bar',
+                    data: [1.5, 2.5, 3.5, 3.5, 4.5, 4.5, 2.5]
+                },
+                {
+                    name: '环城快速路',
+                    type: 'bar',
+                    data: [2.5, 1.5, 2.5, 1.5, 3.5, 4.5, 2.5]
+                },
+                {
+                    name: '环城高速',
+                    type: 'bar',
+                    data: [1.5, 2.5, 3.5, 2.5, 1.5, 1.5, 1.5]
+                },
+                {
+                    name: '停车场',
+                    type: 'bar',
+                    data: [2.5, 3.5, 2.5, 1.5, 1.5, 2.5, 1.5]
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="echarts.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 60%;height:400px;"></div>
+    <div id="two" style="width: 60%;height:400px;"></div>
+    <script type="text/javascript">
+
+        // 指定图表的配置项和数据
+        var option = {
+            color: ['#3398DB'],
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'cross',       // 默认为直线，'line'直线指示器 | 'shadow'阴影指示器 | 'cross'表示，十字准星指示器。
+                    
+                }
+            },
+            legend: {
+                data: ['销量' , '销量2']
+            },
+            xAxis: {
+                name: '物品',
+                data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+                axisPointer: {
+                        type: 'shadow'   // 默认为直线，'line'直线指示器 | 'shadow'柱状阴影指示器
+                    }
+            },
+            yAxis: {
+                name: '销量',
+                type: 'value'
+            },
+            series: [
+            {
+                name: '销量',
+                type: 'bar',
+                barWidth: '60%',
+                data: [5, 20, 36, 10, 10, 20]  
+            },
+            {
+                name: '销量2',
+                type: 'line',
+                barWidth: '60%',
+                data: [5, 20, 36, 10, 10, 20]  
+            }
+            ]  
+        };
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        //数据
+        var res = [
+            [1, 13, 42, 10, 12, 42],
+            [5, 17, 16, 13, 14, 24],
+            [10, 20, 36, 20, 12, 32],
+            [5, 23, 24, 16, 24, 12],
+            [8, 10, 6, 19, 32, 11],
+            [15, 20, 36, 10, 10, 20]
+        ];
+        //定时器,1秒刷新
+        setInterval(getList, 1000);
+        function getList() {
+            var i = parseInt(Math.random() * res.length);
+            /*parseInt表示取整数。
+            Math.random()取0-1之间的小数。
+            res.length表示数组长度，列如此题目数组长度为6*/
+            option.series[0].data = res[i];  //表示option下面的series的第一组数组
+            option.series[1].data = res[i];  //表示option下面的series的第二组数组
+            //使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        };
+        getList();
+
+        //自适应。 在宽度w为百分数（%）表示时就可以自适应。但是如果写死了就不能自适应了。
+        window.onresize = function () { //窗口大小的变化
+            myChart.resize(); //自适应
+            myChart2.resize(); //自适应
+        }
+        //使用刚指定的配置项和数据显示图表。
+        //myChart.setOption(option);
+    </script>
+</body>
+</html>
+<script type="text/javascript">
+
+    // 指定图表的配置项和数据
+    var option2 = {
+        color: ['#5562DB'],
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'line'        // 默认为直线，可选为：'line'直线指示器 | 'shadow'阴影指示器
+            }
+        },
+        legend: {
+            data: ['销量']
+        },
+        xAxis: {
+            name: '物品',
+            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {
+            name: '销量',
+            type: 'value'
+        },
+        series: [{
+            name: '销量',
+            type: 'line',
+            barWidth: '60%',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+    // 基于准备好的dom，初始化echarts实例
+    var myChart2 = echarts.init(document.getElementById('two'));
+    //数据
+    var sup = [
+        [1, 13, 42, 10, 12, 42],
+        [5, 17, 16, 13, 14, 24],
+        [10, 20, 36, 20, 12, 32],
+        [5, 23, 24, 16, 24, 12],
+        [8, 10, 6, 19, 32, 11],
+        [15, 20, 36, 10, 10, 20]
+    ];
+    //定时器,1秒刷新
+    setInterval(getList, 1000);
+    function getList() {
+        var a = parseInt(Math.random() * res.length);
+        /*parseInt表示取整数。
+        Math.random()取0-1之间的小数。
+        res.length表示数组长度，列如此题目数组长度为6*/
+        option2.series[0].data = res[a];
+        //使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option2);
+    };
+    getList();
+
+    //使用刚指定的配置项和数据显示图表。
+    //myChart.setOption(option);
+</script>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>年龄群体违章车辆比较</title>
+</head>
+
+<body>
+    <div id="main" style="width: 800px; height: 500px;"></div>
+    <script src="echarts.js"></script>
+    <script>
+        var myChart = echarts.init(document.getElementById("main"));
+        var option = {
+            title: {
+                text: '年龄群体违章车辆比较',
+                left: 'center',
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow',
+                }
+            },
+            legend: {
+                //type: 'scroll', 表示当小图标变多时可以滚动。
+                orient: 'vertical',   //表示小图标垂直显示。
+                right: 20,
+                data: ['有违章', '无违章'],
+            },
+            grid: {               //grid可以改变图例的格局样式，可让图例相对于div放大缩小。
+                left: '10%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true  //表示是否应用
+            },
+            xAxis: [
+                {
+                    type: 'value',
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'category',
+                    data: ['90后', '80后', '70后', '60后', '50后'],
+                }
+            ],
+            series: [
+                {
+                    name: '无违章',
+                    type: 'bar',
+                    stack: '总量',
+                    data: [220, 520, 420, 460, 180],
+                    itemStyle: {
+                        color: 'green',
+                        normal: {
+                            label: {
+                                show: true,
+                                position: 'top',
+                                formatter: '{c}'//这是关键，在需要的地方加上就行了
+                            }
+                        }
+                    },
+                },
+                {
+                    name: '有违章',
+                    type: 'bar',
+                    stack: '总量',
+                    data: [150, 520, 410, 250, 80],
+                    itemStyle: {
+                        color: 'orange',
+                        normal: {
+                            label: {
+                                show: true,
+                                position: 'top',//显示在上边
+                                formatter: '{c}'//这是关键，在需要的地方加上就行了  '{c}%'
+                            }
+                        }
+                    },
+                },
+            ]
+        };
+        myChart.setOption(option);
+
+    </script>
+</body>
+
+</html>

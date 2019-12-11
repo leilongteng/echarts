@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js 1、一定保留此句话-->
+    <script src="echarts.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom 2、一定保留此句话，可改变宽高-->
+    <div id="main" style="width: 800px;height:600px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例 ，3、一定保留此句话
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据，4、保留var,就是在option前面加var
+        var option = {
+            title: {
+                text: '折柱混合'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {        //此处写了为十字准星指示器。则下面就不用写了。
+                    type: 'cross',  //'cross'表示，十字准星指示器。其实是种简写，表示启用两个正交的轴的axisPointer。
+                    // crossStyle: {
+                    //     color: '#999'
+                    // }
+                }
+            },
+            toolbox: {                                          //表示右上角的一个页面转换工具箱
+                feature: {
+                    dataView: { show: true, readOnly: false }, //表示数据文档视图
+                    magicType: { show: true, type: ['line', 'bar'] },  //表示折线图与柱形图
+                    restore: { show: true },                      //以下两行表示还原为一开始的例图
+                    saveAsImage: { show: true }
+                }
+            },
+            legend: {
+                data: ['蒸发量', '降水量', '平均温度']
+            },
+            xAxis: [
+                {
+                    name: '月份',
+                    nameLocation: 'middle', //坐标轴名称显示位置。可选：'start','middle' 或者 'center','end'
+                    type: 'category',
+                    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                    // axisPointer: {     //axisPointer可以写在tooltip中或者xAxis中，二者选其一即可。上面写了，下面就可以不用写了。
+                    //     type: 'line'   // 默认为直线，'line'直线指示器 | 'shadow'柱状阴影指示器 'cross'表示，十字准星指示器。
+                    // },
+                    axisTick: {    //表示坐标轴刻度相关设置。
+                        alignWithLabel: true ,   //为 true 的时候有效，可以保证刻度线和标签对齐。即x轴的那个小黑线位于中间
+                        //show: false    //是否显示坐标轴刻度。
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '水量',
+                    min: 0,
+                    max: 250,
+                    interval: 50,
+                    axisLabel: {
+                        formatter: '{value} ml'
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '温度',
+                    min: 0,
+                    max: 25,
+                    interval: 5,
+                    axisLabel: {
+                        formatter: '{value} °C'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '蒸发量',
+                    type: 'bar',
+                    data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+                },
+                {
+                    name: '降水量',
+                    type: 'bar',
+                    data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+                },
+                {
+                    name: '平均温度',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。5、一定保留此句话
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

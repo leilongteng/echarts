@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>有无违章车辆比较</title>
+</head>
+<script src="echarts.js"></script>
+
+<body>
+    <div id="main" style="width: 600px; height: 400px; margin: auto; margin-top: 5%;"></div>
+    <script>
+        var myChart = echarts.init(document.getElementById('main'));
+        // 指定图表的配置项和数据，4、保留var,就是在option前面加var
+        var option = {
+            backgroundColor: '#eee',
+            legend: {
+                top:60
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {d}%"
+            },
+            dataset: {
+                source: [
+                    {
+                        value: 286,
+                        name: '有违章',
+                        itemStyle: {
+                            color: '#007fff'
+                        },
+                    },
+                    {
+                        value: 714,
+                        name: '无违章',
+                        itemStyle: {
+                            color: '#c23531',
+                        },
+                    }
+                ]
+            },
+            series: [{
+                name: '是否违章',
+                type: 'pie',
+                radius: 60,
+                center: ['50%', '50%'],
+            }
+            ]
+        };
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>违章类型分析雷达图</title>
+</head>
+
+<body>
+    <div id="main" style="width: 600px; height: 500px;"></div>
+    <script src="echarts.js"></script>
+    <script>
+        var myChart = echarts.init(document.getElementById("main"));
+        var option = {
+            title: {
+                text: '违章类型分析雷达图'
+            },
+            tooltip: {},
+            legend: {
+                data: ['图一', '图二'],
+            },
+            radar: {
+                // shape: 'circle', //显示雷达图为圆形
+                name: {
+                    textStyle: {
+                        color: '#fff',
+                        backgroundColor: '#999',
+                        borderRadius: 3,
+                        padding: [3, 5]
+                    }
+                },
+                indicator: [
+                    { name: '驾驶摩托车在车把上悬挂物品的', max: 100 },
+                    { name: '学习驾驶人不按指定时间上道路学习驾驶的', max: 100 },
+                    { name: '拖拉机牵引多辆挂车的', max: 100 },
+                    { name: '拖拉机违反规定载人的', max: 100 },
+                    { name: '拖拉机驶入大中城市中心城区内道路的', max: 100 },
+                ]
+            },
+            series: [{
+                name: '违章类型比较',
+                type: 'radar',   //表示雷达图
+                areaStyle: {     //用于显示雷达图里面的基本颜色，默认的颜色。
+                    normal: {
+                        //color:'#000',
+                    }
+                },
+                data: [
+                    {
+                        name: '图一',
+                        value: [84, 100, 60, 100, 60],
+                    },
+                    {
+                        name: '图二',
+                        value: [64, 60, 80, 80, 100],
+                    }
+                ]
+            }]
+        };
+
+        myChart.setOption(option);
+
+    </script>
+</body>
+
+</html>
